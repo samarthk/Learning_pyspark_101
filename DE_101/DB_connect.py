@@ -1,7 +1,7 @@
 import sqlite3
 from sqlite3 import Error
 
-#Check DB
+#Check DB ORACLE/SQLLite JDBC
 
 
 def create_connection(db_file):
