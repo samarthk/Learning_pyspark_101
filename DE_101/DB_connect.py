@@ -36,7 +36,7 @@ def select_all_tasks(conn):
 
 if __name__ == '__main__':
     create_connection(r"/home/sammy/snap/dbeaver-ce/90/.local/share/DBeaverData/workspace6/.metadata/sample-database-sqlite-1/Chinook.db")
-
+#
 conn = sqlite3.connect(r"/home/sammy/snap/dbeaver-ce/90/.local/share/DBeaverData/workspace6/.metadata/sample-database-sqlite-1/Chinook.db")
 
 select_all_tasks(conn)
