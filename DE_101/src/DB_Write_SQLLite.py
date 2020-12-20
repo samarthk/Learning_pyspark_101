@@ -1,7 +1,10 @@
 
-
 from pyspark.sql import SparkSession
 spark = SparkSession.builder.master("local[*]").getOrCreate()
+
+from pyspark.sql import DataFrameWriter
+
+
 
 #"jdbc:oracle:thin:username/password@//hostname:portnumber/SID"
 
@@ -13,16 +16,30 @@ myrdd1 = spark.read\
     .option("dbtable", "Album")\
     .option("driver", "org.sqlite.JDBC").load()
 
+#my_writer = DataFrameWriter(myrdd1)
 
+myrdd2 = spark.read\
+    .format("jdbc")\
+    .option("url", "jdbc:sqlite:/home/sammy/Learning_pyspark/SQLITE/STG.db")\
+    .option("dbtable", "STG_Album")\
+    .option("driver", "org.sqlite.JDBC").load()
+
+#myrdd3 = my_writer.jdbc
 
 
 if __name__ == '__main__':
     print('This is main')
-    myrdd1.printSchema()
-    myrdd1.show()
+#    print(my_writer)
+    myrdd2.printSchema()
+    myrdd1.write.csv(path="/home/sammy/Learning_pyspark/OutDir/album_out", mode="append",header="True")
+    myrdd1.write.jdbc(url ="jdbc:sqlite:/home/sammy/Learning_pyspark/SQLITE/STG.db",table="STG_Album",mode="append")
+
+
+#,driver="org.sqlite.JDBC", table="STG_Album",mode="append") -- properties = {"driver", "org.sqlite.JDBC"},
+    myrdd1.show(5)
     myrdd1.describe()
-    myrdd1.collect()
-    myrdd1.count()
+#    myrdd1.collect()
+#    myrdd1.count()
 
     print("Connected SQLLite")
     print(myrdd1)
