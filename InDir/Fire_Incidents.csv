@@ -4998,3 +4998,7 @@ Incident_Number,Exposure_Number,ID,Address,Incident_Date,Call_Number,Alarm_DtTm,
 03013981,0,030139810,124 Mason St.,02/17/2003,030480370,02/17/2003 09:10:20 PM,02/17/2003 09:14:02 PM,02/17/2003 09:30:08 PM,SF,94104,B03,01,,1,4,0,0,0,0,E01,0,0,0,0,0,0,1,"555 - Defective elevator, no occupants",None,86 - Investigate,-,-,-,"449 - Hotel/motel, commercial",,,,,,,,,,,,,,,,,,,,,,,,,,,3,Tenderloin,POINT (-122.40928 37.784622),36,28852,14,10,10,1,17,,1,1,,19,19,5,3,36
 03013983,0,030139830,2190 Grove St.,02/17/2003,030480372,02/17/2003 09:14:08 PM,02/17/2003 09:17:00 PM,02/17/2003 09:22:59 PM,SF,94117,B05,21,,1,4,0,0,0,0,E21,0,0,0,0,0,0,1,"440 - Elec. wiring/equip. problem, other",None,86 - Investigate,-,-,-,"962 - Residential street, road or residential dr",,,,,,,,,,,,,,,,,,,,,,,,,,,1,Lone Mountain/USF,POINT (-122.45255207 37.77422232),16,29492,15,5,2,,,,,,,12,12,7,4,18
 03013985,0,030139850,Franklin St. / Pacific Av.,02/17/2003,030480374,02/17/2003 09:32:32 PM,02/17/2003 09:35:41 PM,02/17/2003 10:03:56 PM,SF,94123,B04,38,,1,4,0,0,0,0,E38,0,0,0,0,0,0,1,"650 - Steam/gas mistaken for smoke, other",None,86 - Investigate,-,-,-,"962 - Residential street, road or residential dr",,,,,,,,,,,,,,,,,,,,,,,,,,,2,Pacific Heights,POINT (-122.424874 37.794607),27,28858,13,9,1,,,,,,,102,102,4,6,30
+
+
+
+
