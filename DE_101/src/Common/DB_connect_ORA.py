@@ -7,7 +7,6 @@ spark = SparkSession.builder.master("local[*]").getOrCreate()
 
 #Check DB ORACLE/
 
-print("Hello ORACLE")
 myrdd2 = spark.read\
     .format("jdbc")\
     .option("url", "jdbc:oracle:thin:user2/user2@//192.168.1.151:1521/xe")\
@@ -22,10 +21,8 @@ myrdd2.describe()
 myrdd2.collect()
 myrdd2.count()
 
-
 print("Connected ORACLE")
 print(myrdd2)
-
 
 print(myrdd2.collect())
 

@@ -1,36 +1,43 @@
-
 from pyspark.sql import SparkSession
-spark = SparkSession.builder.master("local[*]").getOrCreate()
+from DE_101.src.Common import String_UDF
 
+spark = SparkSession \
+    .builder \
+    .appName("Python Spark SQL basic example") \
+    .config("spark.some.config.option", "some-value") \
+    .getOrCreate()
+#spark = SparkSession.builder.master("local[*]").getOrCreate()
+
+from pyspark.sql.functions import upper, to_timestamp, substring
+import time
 
 #Extract
 
 fireIncidentsDF = spark.read.csv('/home/sammy/Learning_pyspark/InDir/Fire_Incidents.csv', header=True, inferSchema=True)
 #fireIncidentsDF.printSchema()
-#fireIncidentsDF.show(5)
-print(fireIncidentsDF.count())
 
-#filter_DF = fireIncidentsDF.filter(fireIncidentsDF.Incident_Number ==18066225 )
+'''Transform
+1. Filter Incident_Date for Year later than 2018
+2. CamelCase City - Upper Instead
+3. Handle All nulls to String - 'NA', Number - 0, Date - '1900-01-01 00:00:00'
+'''
 
-#Transform
-sel_DF=fireIncidentsDF.select("Incident_Number", "Exposure_Number", "ID", "Address", "Incident_Date", "Call_Number", "Alarm_DtTm", "Arrival_DtTm", "Close_DtTm", "City", "ZIP_Code", "Battalion", "Station_Area", "Box", "Suppression_Units", "Suppression_Personnel", "EMS_Units", "EMS_Personnel", "Other_Units", "Other_Personnel", "First_Unit_On_Scene", "Estimated_Property_Loss", "Estimated_Contents_Loss", "Fire_Fatalities", "Fire_Injuries").\
-    filter(fireIncidentsDF.Incident_Number >=18066225)
+changeFormatDF = fireIncidentsDF.withColumn('Incident_Date', to_timestamp('Incident_Date', 'MM/dd/yyyy'))\
+    .withColumn('Alarm_DtTm', to_timestamp('Alarm_DtTm','MM/dd/yyyy hh:mm:ss aa'))\
+    .withColumn('Arrival_DtTm', to_timestamp('Arrival_DtTm','MM/dd/yyyy hh:mm:ss aa'))\
+    .withColumn('Close_DtTm', to_timestamp('Close_DtTm','MM/dd/yyyy hh:mm:ss aa'))\
+    .withColumn('City',upper(fireIncidentsDF.City))
 
-print(sel_DF.count())
+handleNullDF= changeFormatDF.fillna({'City':'NA'}).fillna({'Arrival_DtTm':'1900-01-01 00:00:00'}).fillna({'Estimated_Property_Loss':0})
+filterDF= handleNullDF.filter(handleNullDF.Incident_Date>='2018-01-01 00:00:00')
+
+filterDF.show(5)
 
 #Load
 try:
-    out_DF = sel_DF.write.jdbc(url ="jdbc:sqlite:/home/sammy/Learning_pyspark/SQLITE/STG.db",table="STG_FireIncidents",mode="append")
+    out_DF = filterDF.write.jdbc(url ="jdbc:sqlite:/home/sammy/Learning_pyspark/SQLITE/STG.db",table="STG_FireIncidents",mode="append")
 
 except Exception as e:
         print (" ### Exception ###: ", e)
-
 #out_DF = fireIncidentsDF.write.jdbc(url ="jdbc:sqlite:/home/sammy/Learning_pyspark/SQLITE/STG.db",isolationLevel=1,table="STG_FireIncidents",mode="append")
-
-#print('Done !!')
-
-
-#print(out_DF)
-
-sel_DF.write.jdbc(url ="jdbc:oracle:thin:user2/user2@//192.168.1.151:1521/xe",table="USER2.STG_FireIncidents",mode="append")
 
