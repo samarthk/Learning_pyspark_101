@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from DE_101.src.Common import String_UDF
+import time
 
 spark = SparkSession \
     .builder \
@@ -8,11 +8,9 @@ spark = SparkSession \
     .getOrCreate()
 #spark = SparkSession.builder.master("local[*]").getOrCreate()
 
-from pyspark.sql.functions import upper, to_timestamp, substring
-import time
+from pyspark.sql.functions import upper, to_timestamp
 
 #Extract
-
 fireIncidentsDF = spark.read.csv('/home/sammy/Learning_pyspark/InDir/Fire_Incidents.csv', header=True, inferSchema=True)
 #fireIncidentsDF.printSchema()
 
@@ -32,6 +30,7 @@ handleNullDF= changeFormatDF.fillna({'City':'NA'}).fillna({'Arrival_DtTm':'1900-
 filterDF= handleNullDF.filter(handleNullDF.Incident_Date>='2018-01-01 00:00:00')
 
 filterDF.show(5)
+filterDF.count()
 
 #Load
 try:
@@ -41,3 +40,4 @@ except Exception as e:
         print (" ### Exception ###: ", e)
 #out_DF = fireIncidentsDF.write.jdbc(url ="jdbc:sqlite:/home/sammy/Learning_pyspark/SQLITE/STG.db",isolationLevel=1,table="STG_FireIncidents",mode="append")
 
+time.sleep(5)

@@ -29,7 +29,7 @@ if __name__ == '__main__':
     print('This is main')
 #    print(my_writer)
     myrdd2.printSchema()
-    myrdd1.write.csv(path="/home/sammy/Learning_pyspark/OutDir/album_out", mode="append",header="True")
+    myrdd1.write.csv(path="/home/sammy/Learning_pyspark/OutDir/album_out/fil.csv", mode="append",header="True")
     myrdd1.write.jdbc(url ="jdbc:sqlite:/home/sammy/Learning_pyspark/SQLITE/STG.db",table="STG_Album",mode="append")
 
     myrdd2.show(2)

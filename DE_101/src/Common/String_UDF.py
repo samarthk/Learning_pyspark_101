@@ -1,7 +1,10 @@
 
 def to_camelcase(in_string):
     final=''
-    in_string=in_string.lower()
+    if in_string is not None:
+        in_string=in_string.lower()
+    else:
+        return None
     for i in xrange(len(in_string)):
         item =in_string[i]
         if (in_string[i-1]==" " or in_string[i-1]=="_" or i==0):
