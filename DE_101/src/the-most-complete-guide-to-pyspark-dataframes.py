@@ -3,12 +3,14 @@ import time
 from pyspark.sql import functions as F
 from pyspark.sql.functions import broadcast
 
+from pyspark.sql.types import StringType
+from DE_101.src.Common import String_UDF
+
 spark = SparkSession \
     .builder \
     .appName("Python Spark SQL basic example") \
     .config("spark.some.config.option", "some-value") \
     .getOrCreate()
-
 #spark = SparkSession.builder.master("local[3]").getOrCreate()
 
 
@@ -62,8 +64,7 @@ spark.sql("select City, count(1) as totals "
 
 joinDF = handleNullDF.join(broadcast(fireCallDF), ['Incident_Number'], how='inner').show()
 
-
-rnkDF=spark.sql(" select City, totals , rank() over( ORDER BY totals desc) as rnk from  "
+rnkDF=spark.sql(" select substr(City,2, 5), City , totals , rank() over( ORDER BY totals desc) as rnk from  "
           "(select City, count(1) as totals from fireIncidentsTT group by City having count(1) >1 ) ")
 
 rnkDF.show(8)
