@@ -24,6 +24,7 @@ df1= sqlContext.read.format('jdbc').options(url='jdbc:sqlite:/home/sammy/snap/db
 
 df1.printSchema()  #to see your schema.
 
+#print fireServiceCallsDF.count()
 
 df = spark.createDataFrame([{"hello": "world"} for x in range(1000)])
 df.show(3)
@@ -35,6 +36,7 @@ fireServiceCallsDF = spark.read.csv('/home/sammy/Learning_pyspark/DE_101/Fire_De
 #fireServiceCallsDF.show()
 
 print fireServiceCallsDF.count()
+
 
 fireServiceCallsDF.collect()
 print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
