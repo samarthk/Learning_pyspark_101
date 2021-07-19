@@ -17,9 +17,10 @@ fireServiceCallsDF = spark.read.csv('/home/sammy/Learning_pyspark/DE_101/Fire_De
 print fireServiceCallsDF.count()
 
 print fireServiceCallsDF.collect()
-print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
 
-print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
 
 fireServiceCallsDF.createOrReplaceTempView("fireServiceCalls")
+
 spark.sql("SELECT COUNT(*) , Call_Type FROM fireServiceCalls group by Call_Type order by 1 desc").show(1000, False)
