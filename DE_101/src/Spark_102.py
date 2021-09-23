@@ -13,6 +13,8 @@ print(type(CONSTANTS))
 sc = spark.sparkContext
 sqlContext = SQLContext(sc)
 
+CONSTANTS101 = 'I am Sunny'
+
 #df1 = sqlContext.read.format("jdbc").options(url="jdbc:mysql://localhost:3306/sakila",driver="com.mysql.jdbc.Driver",dbtable="actor",user="root",password="****").load()
 #mysql_url="jdbc:mysql://localhost:3306/sakila?user=root&password=****"
 
