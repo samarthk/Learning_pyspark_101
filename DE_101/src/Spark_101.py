@@ -7,6 +7,7 @@ print(type(CONSTANTS))
 
 df = spark.createDataFrame([{"hello": "world"} for x in range(1000)])
 df.show(3)
+df.show(6)
 
 print(CONSTANTS)
 
