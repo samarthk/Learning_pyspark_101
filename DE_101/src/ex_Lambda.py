@@ -8,7 +8,7 @@ sc = SparkContext()
 
 spark = SparkSession.builder.master("local[2]").getOrCreate()
 
-#Extract
+##Extract
 fireIncidentsDF = spark.read.load("/home/sammy/Learning_pyspark/InDir/Fire_Incidents.csv",format="csv", sep=",", inferSchema="true", header="true")
 fireCallDF = spark.read.load("/home/sammy/Learning_pyspark/InDir/Fire_Department_Calls_for_Service.csv",format="csv", sep=",", inferSchema="true", header="true")
 
