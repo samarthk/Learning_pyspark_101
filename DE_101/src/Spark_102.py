@@ -13,10 +13,11 @@ print(type(CONSTANTS))
 sc = spark.sparkContext
 sqlContext = SQLContext(sc)
 
-CONSTANTS101 = 'I am Sunny'
+CONSTANTS101 = 'I am Sunny, I am DON'
 
 #df1 = sqlContext.read.format("jdbc").options(url="jdbc:mysql://localhost:3306/sakila",driver="com.mysql.jdbc.Driver",dbtable="actor",user="root",password="****").load()
 #mysql_url="jdbc:mysql://localhost:3306/sakila?user=root&password=****"
+
 
 df1= sqlContext.read.format('jdbc').options(url='jdbc:sqlite:/home/sammy/snap/dbeaver-ce/90/.local/share/DBeaverData/workspace6/.metadata/sample-database-sqlite-1/Chinook.db',dbtable='employee',driver='org.sqlite.JDBC').load()
 
